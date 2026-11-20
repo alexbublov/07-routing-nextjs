@@ -10,10 +10,12 @@ import SearchBox from '@/components/SearchBox/SearchBox';
 import { useDebounce } from 'use-debounce';
 import Modal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
-import { useParams } from 'next/navigation';
 
-const NotesClient = () => {
-  const { slug } = useParams<{ slug: string[] }>();
+interface NotesClientProps {
+  slug: string[];
+}
+
+const NotesClient = ({ slug }: NotesClientProps) => {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
