@@ -5,7 +5,6 @@ import css from './NotePreview.module.css';
 import { useQuery } from '@tanstack/react-query';
 import { fetchNoteById } from '@/lib/api';
 import Modal from '@/components/Modal/Modal';
-import Link from 'next/link';
 import BackButton from '@/components/BackButton/BackButton';
 
 const NotePreviewClient = () => {
