@@ -10,8 +10,10 @@ import SearchBox from '@/components/SearchBox/SearchBox';
 import { useDebounce } from 'use-debounce';
 import Modal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
+import { useParams } from 'next/navigation';
 
 const NotesClient = () => {
+  const { slug } = useParams<{ slug: string[] }>();
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,8 +21,14 @@ const NotesClient = () => {
 
   const [value] = useDebounce(search, 500);
   const notesQuery = useQuery({
-    queryKey: ['notes', { value, page, perPage }],
-    queryFn: () => fetchNotes({ search: value, page, perPage }),
+    queryKey: ['notes', { value, page, perPage, slug }],
+    queryFn: () =>
+      fetchNotes({
+        search: value,
+        page,
+        perPage,
+        tag: slug[0] === 'all' ? undefined : slug[0],
+      }),
     refetchOnMount: false,
     placeholderData: keepPreviousData,
   });

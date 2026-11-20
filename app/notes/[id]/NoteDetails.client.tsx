@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import css from './NoteDetails.module.css';
 import { fetchNoteById } from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
+import BackButton from '@/components/BackButton/BackButton';
 
 const NoteDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,6 +25,7 @@ const NoteDetails = () => {
       {note && (
         <main className={css.main}>
           <div className={css.container}>
+            <BackButton />
             <div className={css.item}>
               <div className={css.header}>
                 <h2>{note.title}</h2>
